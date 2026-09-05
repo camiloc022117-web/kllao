@@ -1,14 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const auth = require('./middleware/auth');
-const authHandler = require('./auth');
-const categoriesHandler = require('./categories');
-const sizesHandler = require('./sizes');
-const productsHandler = require('./products');
-const variantsHandler = require('./variants');
-const salesHandler = require('./sales');
-const stockEntriesHandler = require('./stock-entries');
+const auth = require('../lib/middleware/auth');
+const authHandler = require('../lib/handlers/auth');
+const categoriesHandler = require('../lib/handlers/categories');
+const sizesHandler = require('../lib/handlers/sizes');
+const productsHandler = require('../lib/handlers/products');
+const variantsHandler = require('../lib/handlers/variants');
+const salesHandler = require('../lib/handlers/sales');
+const stockEntriesHandler = require('../lib/handlers/stock-entries');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
