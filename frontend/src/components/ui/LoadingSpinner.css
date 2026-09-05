@@ -1,0 +1,26 @@
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 50vh;
+  color: var(--text-secondary);
+}
+
+.loading-spinner__ring {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.3));
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-spinner__text {
+  font-size: 0.9rem;
+  font-weight: 500;
+}

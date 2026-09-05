@@ -1,0 +1,31 @@
+.payment-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.payment-selector__btn {
+  padding: 11px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.payment-selector__btn--active {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+}
+
+.payment-selector__btn:hover:not(.payment-selector__btn--active) {
+  background: rgba(0, 229, 255, 0.06);
+  border-color: rgba(0, 229, 255, 0.2);
+  color: var(--text-primary);
+}

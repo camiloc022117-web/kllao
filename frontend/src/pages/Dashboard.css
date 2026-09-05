@@ -1,0 +1,215 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  animation: fadeIn 0.4s ease;
+}
+
+.dashboard__title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.dashboard__kpi {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease forwards;
+  opacity: 0;
+}
+
+.kpi-card:nth-child(1) { animation-delay: 0.05s; }
+.kpi-card:nth-child(2) { animation-delay: 0.1s; }
+.kpi-card:nth-child(3) { animation-delay: 0.15s; }
+.kpi-card:nth-child(4) { animation-delay: 0.2s; }
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.08);
+}
+
+.kpi-card--primary { border-left: 3px solid var(--color-primary); }
+.kpi-card--warning { border-left: 3px solid var(--warning); }
+
+.kpi-card__icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 229, 255, 0.08);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.kpi-card--warning .kpi-card__icon {
+  background: rgba(255, 214, 0, 0.08);
+}
+
+.kpi-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kpi-card__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+}
+
+.kpi-card__value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.kpi-card--primary .kpi-card__value {
+  color: var(--color-primary);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.kpi-card--warning .kpi-card__value {
+  color: var(--warning);
+  text-shadow: 0 0 10px rgba(255, 214, 0, 0.3);
+}
+
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.dashboard__card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dashboard__card-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.dashboard__card-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0.3), transparent);
+}
+
+.dashboard__empty {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.recent-sales {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.recent-sale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.recent-sale:hover {
+  border-color: rgba(0, 229, 255, 0.15);
+}
+
+.recent-sale__info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.recent-sale__date {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.recent-sale__time {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.recent-sale__total {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.quick-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quick-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+}
+
+.quick-stat__label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.quick-stat__value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.quick-stat__value--warning {
+  color: var(--warning);
+}

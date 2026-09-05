@@ -1,48 +1,35 @@
-import { Outlet, NavLink } from 'react-router-dom'
-import { useTheme } from '../context/ThemeContext'
-import './Layout.css'
-import logoLight from '../assets/logo_light.png'
-import logoDark from '../assets/logo_dark.png'
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from './layout/Sidebar';
+import Header from './layout/Header';
 
 const Layout = () => {
-    const { theme, toggleTheme } = useTheme()
+  const [collapsed, setCollapsed] = useState(false);
 
-    return (
-        <div className="app">
-        <header className="navbar">
-            <div className="navbar-brand">
-                <img 
-                    src={theme === 'light' ? logoLight : logoDark} 
-                    alt="Logo" 
-                    className="logo" 
-                />
-            </div>
-
-            <nav className="navbar-nav">
-            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                Ventas
-            </NavLink>
-            <NavLink to="/inventory" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                Inventario
-            </NavLink>
-            <NavLink to="/products" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                Productos
-            </NavLink>
-            <NavLink to="/reports" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                Reportes
-            </NavLink>
-            </nav>
-
-            <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
-            {theme === 'light' ? '🌙' : '☀️'}
-            </button>
-        </header>
-
-        <main className="main-content">
-            <Outlet />
+  return (
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+      <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        marginLeft: collapsed ? '72px' : '240px',
+        transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        height: '100vh',
+        overflow: 'hidden'
+      }}>
+        <Header />
+        <main style={{
+          flex: 1,
+          overflow: 'auto',
+          padding: '24px',
+          height: 0
+        }}>
+          <Outlet />
         </main>
-        </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;

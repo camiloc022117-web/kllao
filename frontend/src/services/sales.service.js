@@ -1,9 +1,7 @@
-import api from './api'
+import api from './api';
 
-export const getSales = () => api.get('/sales')
-export const getSaleById = (id) => api.get(`/sales/${id}`)
-export const createSale = (data) => api.post('/sales', data)
-export const getSalesByDateRange = (startDate, endDate) => 
-    api.get(`/sales/by-date?start=${startDate}&end=${endDate}`)
-
-
+export const getSales = () => api.get('/api/sales');
+export const getSaleById = (id) => api.get(`/api/sales?id=${id}`);
+export const createSale = (data) => api.post('/api/sales', data);
+export const getSalesByDateRange = (start, end) =>
+  api.get(`/api/sales?start=${start}&end=${end}`);

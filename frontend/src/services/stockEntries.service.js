@@ -1,5 +1,5 @@
-import api from './api'
+import api from './api';
 
-export const getStockEntries = () => api.get ('/stock-entries')
-export const getStockEntryById = (id) => api.get(`/stock-entries/${id}`)
-export const createStockEntry = (data) => api.post('/stock-entries', data)
+export const getStockEntries = () => api.get('/api/stock-entries');
+export const getStockEntryById = (id) => api.get(`/api/stock-entries?id=${id}`);
+export const createStockEntry = (data) => api.post('/api/stock-entries', data);

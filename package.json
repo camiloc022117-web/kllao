@@ -1,6 +1,20 @@
 {
+  "name": "kllao",
+  "version": "2.0.0",
+  "private": true,
+  "description": "K'lliao - Sistema POS y CRM",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "dev:api": "node api/dev-server.js",
+    "build": "cd frontend && npm run build",
+    "lint": "cd frontend && npm run lint",
+    "start": "node api/dev-server.js"
+  },
   "dependencies": {
-    "axios": "^1.18.1",
-    "react-router-dom": "^7.18.1"
+    "@supabase/supabase-js": "^2.49.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.0",
+    "zod": "^3.24.2"
   }
 }
