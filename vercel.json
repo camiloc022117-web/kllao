@@ -1,6 +1,14 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
-  "rewrites": [
+  "outputDirectory": "public",
+  "builds": [
+    {
+      "src": "api/{products,auth,categories,sales,sizes,stock-entries,variants}.js",
+      "use": "@vercel/node@3"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
     { "handle": "filesystem" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
