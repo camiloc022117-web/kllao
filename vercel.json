@@ -1,8 +1,19 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "installCommand": "npm install",
-  "framework": null,
+  "installCommand": "npm install && cd frontend && npm install",
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static",
+      "config": {
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      }
+    }
+  ],
   "rewrites": [
     { "source": "/api/auth", "destination": "/api/auth.js" },
     { "source": "/api/categories", "destination": "/api/categories.js" },
@@ -12,8 +23,5 @@
     { "source": "/api/sales", "destination": "/api/sales.js" },
     { "source": "/api/stock-entries", "destination": "/api/stock-entries.js" },
     { "source": "/((?!api/).*)", "destination": "/frontend/dist/$1" }
-  ],
-  "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" }
   ]
 }
