@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cd frontend && npm run dev",
     "dev:api": "node api/dev-server.js",
-    "build": "cd frontend && npm run build",
+    "build": "cd frontend && npm install && npm run build",
     "lint": "cd frontend && npm run lint",
     "start": "node api/dev-server.js"
   },
