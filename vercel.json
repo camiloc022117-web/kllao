@@ -1,8 +1,4 @@
 {
   "installCommand": "npm install && cd frontend && npm install",
-  "buildCommand": "cd frontend && npm run build",
-  "rewrites": [
-    { "handle": "filesystem" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
-  ]
+  "buildCommand": "cd frontend && npm run build"
 }
