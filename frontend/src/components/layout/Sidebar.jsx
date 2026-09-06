@@ -12,43 +12,47 @@ const NAV_ITEMS = [
   { to: '/reports', label: 'Reportes', icon: '📈' },
 ];
 
-const Sidebar = ({ collapsed, onToggle }) => {
+const Sidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }) => {
   const { theme } = useTheme();
 
   return (
-    <aside className={`sidebar ${collapsed ? 'sidebar--collapsed' : ''}`}>
-      <div className="sidebar__header">
-        <img
-          src={theme === 'light' ? logoLight : logoDark}
-          alt="Logo"
-          className="sidebar__logo"
-        />
-        {!collapsed && <span className="sidebar__brand">K'lliao</span>}
-      </div>
+    <>
+      {mobileOpen && <div className="sidebar-backdrop" onClick={onMobileClose} />}
+      <aside className={`sidebar ${collapsed ? 'sidebar--collapsed' : ''} ${mobileOpen ? 'sidebar--mobile-open' : ''}`}>
+        <div className="sidebar__header">
+          <img
+            src={theme === 'light' ? logoLight : logoDark}
+            alt="Logo"
+            className="sidebar__logo"
+          />
+          {!collapsed && <span className="sidebar__brand">K'lliao</span>}
+        </div>
 
-      <nav className="sidebar__nav">
-        {NAV_ITEMS.map(item => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.end}
-            className={({ isActive }) =>
-              `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
-            }
-            title={collapsed ? item.label : ''}
-          >
-            <span className="sidebar__icon">{item.icon}</span>
-            {!collapsed && <span className="sidebar__label">{item.label}</span>}
-          </NavLink>
-        ))}
-      </nav>
+        <nav className="sidebar__nav">
+          {NAV_ITEMS.map(item => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.end}
+              className={({ isActive }) =>
+                `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
+              }
+              title={collapsed ? item.label : ''}
+              onClick={onMobileClose}
+            >
+              <span className="sidebar__icon">{item.icon}</span>
+              {!collapsed && <span className="sidebar__label">{item.label}</span>}
+            </NavLink>
+          ))}
+        </nav>
 
-      <div className="sidebar__footer">
-        <button className="sidebar__toggle" onClick={onToggle}>
-          {collapsed ? '→' : '←'}
-        </button>
-      </div>
-    </aside>
+        <div className="sidebar__footer">
+          <button className="sidebar__toggle" onClick={onToggle}>
+            {collapsed ? '→' : '←'}
+          </button>
+        </div>
+      </aside>
+    </>
   );
 };
 

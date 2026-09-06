@@ -213,3 +213,37 @@
 .quick-stat__value--warning {
   color: var(--warning);
 }
+
+@media (max-width: 768px) {
+  .dashboard__title {
+    font-size: 1.2rem;
+  }
+
+  .dashboard__kpi {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .kpi-card {
+    padding: 14px 16px;
+  }
+
+  .kpi-card__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .kpi-card__value {
+    font-size: 1.1rem;
+  }
+
+  .dashboard__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .dashboard__card {
+    padding: 16px;
+  }
+}

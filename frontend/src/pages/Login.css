@@ -175,3 +175,24 @@
   cursor: not-allowed;
   transform: none;
 }
+
+@media (max-width: 480px) {
+  .login__card {
+    padding: 36px 24px;
+    margin: 16px;
+  }
+
+  .login__logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .login__title {
+    font-size: 1.8rem;
+  }
+
+  .login__field input {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+}

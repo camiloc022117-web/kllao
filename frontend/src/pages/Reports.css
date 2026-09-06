@@ -235,3 +235,46 @@
   border: 1.5px dashed rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
 }
+
+@media (max-width: 768px) {
+  .reports-title {
+    font-size: 1.2rem;
+  }
+
+  .reports-filters {
+    padding: 16px;
+  }
+
+  .quick-filters {
+    flex-wrap: wrap;
+  }
+
+  .date-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .date-filters .btn {
+    width: 100%;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .slush-section,
+  .sales-section {
+    padding: 16px;
+  }
+
+  .sales-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .reports-empty {
+    padding: 40px 20px;
+  }
+}

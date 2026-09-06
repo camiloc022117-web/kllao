@@ -336,3 +336,47 @@
   border-color: rgba(0, 229, 255, 0.3);
   transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+  .inventory-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .inventory-title {
+    font-size: 1.2rem;
+  }
+
+  .inventory-tabs {
+    width: 100%;
+  }
+
+  .entry-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .entry-catalog {
+    min-height: 30vh;
+  }
+
+  .entry-form {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .entry-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+  }
+
+  .entry-item-inputs {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .entry-item-subtotal {
+    grid-column: 1 / -1;
+    text-align: right;
+  }
+}

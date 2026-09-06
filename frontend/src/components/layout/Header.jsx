@@ -2,7 +2,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onMenuClick }) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout } = useAuth();
 
@@ -10,6 +10,9 @@ const Header = () => {
 
   return (
     <header className="header">
+      <button className="header__hamburger" onClick={onMenuClick} aria-label="Menu">
+        ☰
+      </button>
       <div className="header__spacer" />
       <div className="header__actions">
         <button className="header__theme-btn" onClick={toggleTheme} title="Cambiar tema">

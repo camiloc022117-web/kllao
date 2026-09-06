@@ -251,3 +251,34 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(0, 229, 255, 0.35);
 }
+
+@media (max-width: 768px) {
+  .pos {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .pos-catalog {
+    min-height: 50vh;
+  }
+
+  .pos-order {
+    min-height: auto;
+    max-height: 60vh;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+  }
+
+  .variant-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+  }
+
+  .total-amount {
+    font-size: 1.3rem;
+  }
+}

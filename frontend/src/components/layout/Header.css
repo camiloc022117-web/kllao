@@ -87,3 +87,39 @@
   color: var(--danger);
   box-shadow: 0 0 12px rgba(255, 82, 82, 0.15);
 }
+
+.header__hamburger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .header__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .header__hamburger:hover {
+    background: rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
+    color: var(--color-primary);
+  }
+
+  .header__logout {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
