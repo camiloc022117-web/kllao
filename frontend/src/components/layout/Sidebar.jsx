@@ -26,6 +26,7 @@ const Sidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }) => {
             className="sidebar__logo"
           />
           {!collapsed && <span className="sidebar__brand">K'lliao</span>}
+          <button className="sidebar__close" onClick={onMobileClose}>✕</button>
         </div>
 
         <nav className="sidebar__nav">
