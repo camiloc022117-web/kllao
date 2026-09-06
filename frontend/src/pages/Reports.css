@@ -237,21 +237,40 @@
 }
 
 @media (max-width: 768px) {
+  .reports {
+    height: auto;
+    min-height: 0;
+    gap: 14px;
+  }
+
   .reports-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .reports-filters {
-    padding: 16px;
+    padding: 14px;
+    gap: 12px;
   }
 
   .quick-filters {
     flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .quick-filters button {
+    padding: 6px 12px;
+    font-size: 0.75rem;
   }
 
   .date-filters {
     flex-direction: column;
     align-items: stretch;
+    gap: 8px;
+  }
+
+  .date-filters .input-group input {
+    padding: 10px 12px;
+    font-size: 0.85rem;
   }
 
   .date-filters .btn {
@@ -260,21 +279,35 @@
 
   .summary-cards {
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 8px;
   }
 
   .slush-section,
   .sales-section {
-    padding: 16px;
+    padding: 14px;
   }
 
-  .sales-table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  .slush-card {
+    padding: 10px 16px;
+  }
+
+  .slush-size {
+    font-size: 1rem;
+  }
+
+  .sales-table th,
+  .sales-table td {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+
+  .sale-item-tag {
+    font-size: 0.65rem;
+    padding: 2px 8px;
   }
 
   .reports-empty {
-    padding: 40px 20px;
+    padding: 30px 16px;
+    font-size: 0.8rem;
   }
 }

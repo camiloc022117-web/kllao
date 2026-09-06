@@ -215,27 +215,37 @@
 }
 
 @media (max-width: 768px) {
+  .dashboard {
+    height: auto;
+    min-height: 0;
+  }
+
   .dashboard__title {
     font-size: 1.2rem;
   }
 
   .dashboard__kpi {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
 
   .kpi-card {
-    padding: 14px 16px;
+    padding: 12px 14px;
+    gap: 10px;
   }
 
   .kpi-card__icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .kpi-card__label {
+    font-size: 0.6rem;
   }
 
   .kpi-card__value {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .dashboard__grid {
@@ -244,6 +254,18 @@
   }
 
   .dashboard__card {
-    padding: 16px;
+    padding: 14px;
+  }
+
+  .recent-sale {
+    padding: 8px 10px;
+  }
+
+  .recent-sale__date {
+    font-size: 0.75rem;
+  }
+
+  .recent-sale__total {
+    font-size: 0.8rem;
   }
 }

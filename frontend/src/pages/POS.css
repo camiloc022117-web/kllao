@@ -256,29 +256,64 @@
   .pos {
     grid-template-columns: 1fr;
     height: auto;
-    min-height: 100%;
+    min-height: 0;
+    gap: 12px;
   }
 
   .pos-catalog {
-    min-height: 50vh;
+    min-height: 40vh;
+    max-height: 60vh;
+    padding: 14px;
   }
 
   .pos-order {
     min-height: auto;
-    max-height: 60vh;
+    max-height: 50vh;
+    padding: 14px;
+  }
+
+  .catalog-section {
+    margin-bottom: 18px;
+  }
+
+  .catalog-title {
+    font-size: 0.65rem;
+    margin-bottom: 10px;
   }
 
   .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 6px;
+  }
+
+  .variant-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 8px;
   }
 
-  .variant-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 8px;
+  .order-title {
+    font-size: 0.65rem;
+    margin-bottom: 12px;
+  }
+
+  .order-item {
+    padding: 10px;
+  }
+
+  .order-item-name {
+    font-size: 0.8rem;
+  }
+
+  .order-item-price {
+    font-size: 0.8rem;
   }
 
   .total-amount {
     font-size: 1.3rem;
+  }
+
+  .order-submit {
+    padding: 12px;
+    font-size: 0.9rem;
   }
 }

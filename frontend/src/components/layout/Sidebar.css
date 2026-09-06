@@ -216,4 +216,8 @@
   .sidebar--collapsed {
     width: 260px;
   }
+
+  .sidebar__footer {
+    display: none;
+  }
 }
