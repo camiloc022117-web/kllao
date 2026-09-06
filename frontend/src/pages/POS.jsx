@@ -22,7 +22,7 @@ const POS = () => {
   const [toast, setToast] = useState({ message: '', type: 'success' });
 
   useEffect(() => {
-    document.title = "Ventas | K'lliao";
+    document.title = "Ventas | K'llao";
   }, []);
 
   useEffect(() => {

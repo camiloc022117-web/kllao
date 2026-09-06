@@ -37,7 +37,7 @@ const Login = () => {
           alt="Logo"
           className="login__logo"
         />
-        <h1 className="login__title">K'lliao</h1>
+        <h1 className="login__title">K'llao</h1>
         <p className="login__subtitle">Inicia sesion para continuar</p>
 
         <form className="login__form" onSubmit={handleSubmit}>

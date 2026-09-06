@@ -30,7 +30,7 @@ const Inventory = () => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    document.title = "Inventario | K'lliao";
+    document.title = "Inventario | K'llao";
   }, []);
 
   const loadData = async () => {

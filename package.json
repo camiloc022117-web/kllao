@@ -2,7 +2,7 @@
   "name": "kllao",
   "version": "2.0.0",
   "private": true,
-  "description": "K'lliao - Sistema POS y CRM",
+  "description": "K'llao - Sistema POS y CRM",
   "scripts": {
     "dev": "cd frontend && npm run dev",
     "dev:api": "node api/dev-server.js",

@@ -30,7 +30,7 @@ app.use('/api/sales', auth, wrapHandler(salesHandler));
 app.use('/api/stock-entries', auth, wrapHandler(stockEntriesHandler));
 
 app.get('/', (req, res) => {
-  res.json({ message: "K'lliao API running" });
+  res.json({ message: "K'llao API running" });
 });
 
 app.listen(PORT, () => {

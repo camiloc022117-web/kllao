@@ -4,12 +4,12 @@ const ThemeContext = createContext()
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('klliao-theme') || 'dark'
+    return localStorage.getItem('kllao-theme') || 'dark'
   })
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('klliao-theme', theme)
+    localStorage.setItem('kllao-theme', theme)
   }, [theme])
 
   const toggleTheme = () => {

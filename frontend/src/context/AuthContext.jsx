@@ -10,11 +10,11 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('klliao-token');
+    const token = localStorage.getItem('kllao-token');
     if (token) {
       getMe(token)
         .then(({ user }) => setUser(user))
-        .catch(() => localStorage.removeItem('klliao-token'))
+        .catch(() => localStorage.removeItem('kllao-token'))
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
@@ -23,12 +23,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const { user, session } = await loginService(email, password);
-    localStorage.setItem('klliao-token', session.access_token);
+    localStorage.setItem('kllao-token', session.access_token);
     setUser(user);
   };
 
   const logout = () => {
-    localStorage.removeItem('klliao-token');
+    localStorage.removeItem('kllao-token');
     setUser(null);
   };
 

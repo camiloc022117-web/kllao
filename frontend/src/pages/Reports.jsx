@@ -17,7 +17,7 @@ const Reports = () => {
   const [toast, setToast] = useState({ message: '', type: 'success' });
 
   useEffect(() => {
-    document.title = "Reportes | K'lliao";
+    document.title = "Reportes | K'llao";
   }, []);
 
   const handleSearch = async () => {
