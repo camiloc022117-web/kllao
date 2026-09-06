@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getProducts, createProduct, updateProduct, deleteProduct } from '../services/products.service';
 import { getVariants, updateVariant, createVariant, deleteVariant } from '../services/variants.service';
 import { getCategories, createCategory, updateCategory, deleteCategory } from '../services/categories.service';
+import { getSizes, createSize } from '../services/sizes.service';
 import { PRODUCT_LABEL, CATEGORY_LABEL } from '../utils/labels';
 import { CATEGORIES_ORDER } from '../utils/constants';
 import { LiquorBadge } from '../components/ui/Badge';
@@ -15,11 +16,13 @@ import './Products.css';
 const emptyProduct = { name: '', description: '', category_id: '' };
 const emptyVariant = { product_id: '', size_id: '', has_liquor: false, price: 0 };
 const emptyCategory = { name: '', description: '' };
+const emptySize = { name: '' };
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [variants, setVariants] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
   const [toast, setToast] = useState({ message: '', type: 'success' });
@@ -28,21 +31,24 @@ const Products = () => {
   const [showProductModal, setShowProductModal] = useState(false);
   const [showVariantModal, setShowVariantModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showSizeModal, setShowSizeModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [editingVariant, setEditingVariant] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
   const [productForm, setProductForm] = useState(emptyProduct);
   const [variantForm, setVariantForm] = useState(emptyVariant);
   const [categoryForm, setCategoryForm] = useState(emptyCategory);
+  const [sizeForm, setSizeForm] = useState(emptySize);
   const [saving, setSaving] = useState(false);
 
   const loadData = async () => {
     try {
       setError(null);
-      const [p, v, c] = await Promise.all([getProducts(), getVariants(), getCategories()]);
+      const [p, v, c, s] = await Promise.all([getProducts(), getVariants(), getCategories(), getSizes()]);
       setProducts(p.data || p);
       setVariants(v.data || v);
       setCategories(c.data || c);
+      setSizes(s.data || s);
     } catch (e) {
       console.error('Error loading products:', e);
       setError(e.response?.data?.error || e.message || 'Error al cargar productos');
@@ -121,7 +127,7 @@ const Products = () => {
     setSaving(true);
     try {
       if (editingVariant) {
-        await updateVariant(editingVariant.id, { has_liquor: variantForm.has_liquor, price: variantForm.price });
+        await updateVariant(editingVariant.id, { size_id: variantForm.size_id, has_liquor: variantForm.has_liquor, price: variantForm.price });
         setToast({ message: 'Variante actualizada', type: 'success' });
       } else {
         await createVariant(variantForm);
@@ -129,6 +135,23 @@ const Products = () => {
       }
       setShowVariantModal(false);
       await loadData();
+    } catch (e) {
+      setToast({ message: e.response?.data?.error || 'Error al guardar', type: 'error' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleSaveSize = async () => {
+    setSaving(true);
+    try {
+      const res = await createSize(sizeForm);
+      const created = res.data || res;
+      setSizes(prev => [...prev, created]);
+      setVariantForm({ ...variantForm, size_id: created.id });
+      setShowSizeModal(false);
+      setSizeForm(emptySize);
+      setToast({ message: 'Tamaño creado', type: 'success' });
     } catch (e) {
       setToast({ message: e.response?.data?.error || 'Error al guardar', type: 'error' });
     } finally {
@@ -387,27 +410,24 @@ const Products = () => {
       <Modal isOpen={showVariantModal} onClose={() => setShowVariantModal(false)} title={editingVariant ? 'Editar variante' : 'Nueva variante'}>
         <div className="modal-form">
           {!editingVariant && (
-            <>
-              <div className="modal-form__field">
-                <label>Producto</label>
-                <select value={variantForm.product_id} onChange={e => setVariantForm({ ...variantForm, product_id: e.target.value })}>
-                  <option value="">Seleccionar</option>
-                  {products.filter(p => p.category_name === 'slushies').map(p => <option key={p.id} value={p.id}>{PRODUCT_LABEL(p.name)}</option>)}
-                </select>
-              </div>
-              <div className="modal-form__field">
-                <label>Tamano</label>
-                <select value={variantForm.size_id} onChange={e => setVariantForm({ ...variantForm, size_id: e.target.value })}>
-                  <option value="">Seleccionar</option>
-                  <option value="1">10oz</option>
-                  <option value="2">16oz</option>
-                  <option value="3">20oz</option>
-                  <option value="4">32oz</option>
-                  <option value="5">Litro</option>
-                </select>
-              </div>
-            </>
+            <div className="modal-form__field">
+              <label>Producto</label>
+              <select value={variantForm.product_id} onChange={e => setVariantForm({ ...variantForm, product_id: e.target.value })}>
+                <option value="">Seleccionar</option>
+                {products.filter(p => p.category_name === 'slushies').map(p => <option key={p.id} value={p.id}>{PRODUCT_LABEL(p.name)}</option>)}
+              </select>
+            </div>
           )}
+          <div className="modal-form__field">
+            <div className="modal-form__field-header">
+              <label>Tamano</label>
+              <button type="button" className="modal-form__link-btn" onClick={() => { setSizeForm(emptySize); setShowSizeModal(true); }}>+ Nuevo</button>
+            </div>
+            <select value={variantForm.size_id} onChange={e => setVariantForm({ ...variantForm, size_id: e.target.value })}>
+              <option value="">Seleccionar</option>
+              {sizes.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+            </select>
+          </div>
           <div className="modal-form__row">
             <div className="modal-form__field">
               <label>Licor</label>
@@ -441,6 +461,19 @@ const Products = () => {
           <div className="modal-form__actions">
             <Button variant="secondary" onClick={() => setShowCategoryModal(false)}>Cancelar</Button>
             <Button variant="primary" loading={saving} onClick={handleSaveCategory}>{editingCategory ? 'Guardar' : 'Crear'}</Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal isOpen={showSizeModal} onClose={() => setShowSizeModal(false)} title="Nuevo tamano">
+        <div className="modal-form">
+          <div className="modal-form__field">
+            <label>Nombre</label>
+            <input value={sizeForm.name} onChange={e => setSizeForm({ ...sizeForm, name: e.target.value })} placeholder="Ej: 16oz, 32oz, Litro" />
+          </div>
+          <div className="modal-form__actions">
+            <Button variant="secondary" onClick={() => setShowSizeModal(false)}>Cancelar</Button>
+            <Button variant="primary" loading={saving} onClick={handleSaveSize}>Crear</Button>
           </div>
         </div>
       </Modal>
