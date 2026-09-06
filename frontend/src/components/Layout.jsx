@@ -15,6 +15,14 @@ const Layout = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleMenuClick = () => {
+    if (window.innerWidth <= 768) {
+      setMobileOpen(prev => !prev);
+    } else {
+      setCollapsed(prev => !prev);
+    }
+  };
+
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       <Sidebar
@@ -32,7 +40,10 @@ const Layout = () => {
         height: '100vh',
         overflow: 'hidden'
       }} className="layout-main">
-        <Header onMenuClick={() => setMobileOpen(true)} />
+        <Header
+          onMenuClick={handleMenuClick}
+          sidebarCollapsed={collapsed}
+        />
         <main style={{
           flex: 1,
           overflow: 'auto',

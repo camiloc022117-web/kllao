@@ -2,7 +2,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
-const Header = ({ onMenuClick }) => {
+const Header = ({ onMenuClick, sidebarCollapsed }) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout } = useAuth();
 
@@ -10,8 +10,8 @@ const Header = ({ onMenuClick }) => {
 
   return (
     <header className="header">
-      <button className="header__hamburger" onClick={onMenuClick} aria-label="Menu">
-        ☰
+      <button className="header__hamburger" onClick={onMenuClick} title="Menu">
+        {sidebarCollapsed ? '☰' : '✕'}
       </button>
       <div className="header__spacer" />
       <div className="header__actions">
