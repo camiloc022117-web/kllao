@@ -154,6 +154,38 @@
   border-top: 1px solid var(--glass-border);
 }
 
+.products-mobile-grid {
+  display: none;
+}
+
+.products-empty-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.products-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.products-error__icon {
+  font-size: 2.5rem;
+}
+
+.products-error__msg {
+  color: var(--danger);
+  font-size: 0.9rem;
+  max-width: 300px;
+}
+
 @media (max-width: 768px) {
   .products-view {
     height: auto;
@@ -163,7 +195,7 @@
 
   .products-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 10px;
   }
 
@@ -191,6 +223,96 @@
 
   .products-content {
     overflow: visible;
+  }
+
+  .products-mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .products-mobile-grid + .data-table-wrapper {
+    display: none;
+  }
+
+  .product-mobile-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s ease;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  .product-mobile-card:hover {
+    border-color: rgba(0, 229, 255, 0.2);
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.06);
+  }
+
+  .product-mobile-card__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .product-mobile-card__icon {
+    font-size: 1.2rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 229, 255, 0.08);
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+
+  .product-mobile-card__name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .product-mobile-card__desc {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .product-mobile-card__price {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+  }
+
+  .product-mobile-card__category {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    border-radius: 20px;
+    font-size: 0.68rem;
+    color: var(--color-primary);
+    font-weight: 500;
+    width: fit-content;
+  }
+
+  .product-mobile-card__meta {
+    display: flex;
+    align-items: center;
+  }
+
+  .product-mobile-card__actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid var(--glass-border);
   }
 
   .products-action-btn {

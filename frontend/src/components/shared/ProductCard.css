@@ -62,3 +62,25 @@
 .product-card__stock { font-size: 0.7rem; opacity: 0.6; }
 .product-card__stock--low { color: var(--warning); }
 .product-card__variant { font-size: 0.7rem; opacity: 0.7; }
+
+@media (max-width: 768px) {
+  .product-card {
+    padding: 12px 8px;
+    min-height: 64px;
+    border-radius: var(--radius);
+    gap: 3px;
+  }
+
+  .product-card--slush {
+    min-height: 72px;
+    font-size: 0.9rem;
+  }
+
+  .product-card__name {
+    font-size: 0.78rem;
+  }
+
+  .product-card__price {
+    font-size: 0.7rem;
+  }
+}

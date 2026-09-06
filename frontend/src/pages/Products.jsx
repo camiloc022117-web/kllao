@@ -23,6 +23,7 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
   const [toast, setToast] = useState({ message: '', type: 'success' });
+  const [error, setError] = useState(null);
 
   const [showProductModal, setShowProductModal] = useState(false);
   const [showVariantModal, setShowVariantModal] = useState(false);
@@ -37,12 +38,14 @@ const Products = () => {
 
   const loadData = async () => {
     try {
+      setError(null);
       const [p, v, c] = await Promise.all([getProducts(), getVariants(), getCategories()]);
       setProducts(p.data || p);
       setVariants(v.data || v);
       setCategories(c.data || c);
     } catch (e) {
-      console.error(e);
+      console.error('Error loading products:', e);
+      setError(e.response?.data?.error || e.message || 'Error al cargar productos');
     } finally {
       setLoading(false);
     }
@@ -230,6 +233,23 @@ const Products = () => {
 
   if (loading) return <LoadingSpinner />;
 
+  if (error) {
+    return (
+      <div className="products-view">
+        <div className="products-header">
+          <h1 className="products-title">Catalogo de productos</h1>
+        </div>
+        <div className="products-error">
+          <span className="products-error__icon">⚠️</span>
+          <p className="products-error__msg">{error}</p>
+          <Button variant="secondary" onClick={() => { setLoading(true); loadData(); }}>
+            Reintentar
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   const tabs = [
     { key: 'all', label: 'Todos' },
     ...CATEGORIES_ORDER.map(c => ({ key: c, label: CATEGORY_LABEL(c) })),
@@ -272,29 +292,71 @@ const Products = () => {
 
       <div className="products-content">
         {activeTab === 'categories' ? (
-          <DataTable
-            columns={categoryColumns}
-            data={categories}
-            searchable
-            searchPlaceholder="Buscar categoria..."
-            emptyMessage="No hay categorias"
-          />
+          <>
+            <div className="products-mobile-grid">
+              {categories.length === 0 ? (
+                <p className="products-empty-msg">No hay categorias</p>
+              ) : categories.map(cat => (
+                <div key={cat.id} className="product-mobile-card">
+                  <div className="product-mobile-card__header">
+                    <span className="product-mobile-card__icon">🏷️</span>
+                    <span className="product-mobile-card__name">{CATEGORY_LABEL(cat.name)}</span>
+                  </div>
+                  <p className="product-mobile-card__desc">{cat.description || 'Sin descripcion'}</p>
+                  <div className="product-mobile-card__actions">
+                    <button className="products-action-btn" onClick={() => openEditCategory(cat)} title="Editar">✏️</button>
+                    <button className="products-action-btn products-action-btn--danger" onClick={() => handleDeleteCategory(cat.id)} title="Eliminar">🗑️</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <DataTable columns={categoryColumns} data={categories} searchable searchPlaceholder="Buscar categoria..." emptyMessage="No hay categorias" />
+          </>
         ) : activeTab === 'variants' ? (
-          <DataTable
-            columns={variantColumns}
-            data={variants}
-            searchable
-            searchPlaceholder="Buscar variante..."
-            emptyMessage="No hay variantes"
-          />
+          <>
+            <div className="products-mobile-grid">
+              {variants.length === 0 ? (
+                <p className="products-empty-msg">No hay variantes</p>
+              ) : variants.map(v => (
+                <div key={v.id} className="product-mobile-card">
+                  <div className="product-mobile-card__header">
+                    <span className="product-mobile-card__icon">{v.has_liquor ? '🥃' : '🧊'}</span>
+                    <span className="product-mobile-card__name">Granizado {v.size_name}</span>
+                  </div>
+                  <p className="product-mobile-card__price">{fmt(v.price)}</p>
+                  <div className="product-mobile-card__meta">
+                    <LiquorBadge hasLiquor={v.has_liquor} />
+                  </div>
+                  <div className="product-mobile-card__actions">
+                    <button className="products-action-btn" onClick={() => openEditVariant(v)} title="Editar">✏️</button>
+                    <button className="products-action-btn products-action-btn--danger" onClick={() => handleDeleteVariant(v.id)} title="Eliminar">🗑️</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <DataTable columns={variantColumns} data={variants} searchable searchPlaceholder="Buscar variante..." emptyMessage="No hay variantes" />
+          </>
         ) : (
-          <DataTable
-            columns={productColumns}
-            data={filteredProducts}
-            searchable
-            searchPlaceholder="Buscar producto..."
-            emptyMessage="No hay productos"
-          />
+          <>
+            <div className="products-mobile-grid">
+              {filteredProducts.length === 0 ? (
+                <p className="products-empty-msg">No hay productos</p>
+              ) : filteredProducts.map(p => (
+                <div key={p.id} className="product-mobile-card">
+                  <div className="product-mobile-card__header">
+                    <span className="product-mobile-card__icon">📦</span>
+                    <span className="product-mobile-card__name">{PRODUCT_LABEL(p.name)}</span>
+                  </div>
+                  <span className="product-mobile-card__category">{CATEGORY_LABEL(p.category_name)}</span>
+                  <div className="product-mobile-card__actions">
+                    <button className="products-action-btn" onClick={() => openEditProduct(p)} title="Editar">✏️</button>
+                    <button className="products-action-btn products-action-btn--danger" onClick={() => handleDeleteProduct(p.id)} title="Eliminar">🗑️</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <DataTable columns={productColumns} data={filteredProducts} searchable searchPlaceholder="Buscar producto..." emptyMessage="No hay productos" />
+          </>
         )}
       </div>
 
